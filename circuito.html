@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DecibelTool - Simulador</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">DecibelTool</h1>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="#">Simulador</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main simulador">
+    <section class="entrada-section">
+      <h2>Ingrese los dB de entrada</h2>
+      <input type="number" id="inputDB" placeholder="dB de entrada" />
+      <button class="btn" id="btnEntrada">Agregar</button>
+    </section>
+
+    <section class="dispositivo-section">
+      <h2>Agregar un dispositivo</h2>
+      <div class="form-row">
+        <select id="tipoDispositivo">
+          <option value="amplificador">Amplificador</option>
+          <option value="atenuador">Atenuador</option>
+        </select>
+        <input type="number" id="valorDispositivo" placeholder="Valor en dB" />
+        <select id="magnitudDispositivo">
+          <option value="potencia">Potencia</option>
+          <option value="tension">Tensión</option>
+          <option value="corriente">Corriente</option>
+        </select>
+        <button class="btn" id="btnAgregarDispositivo">Agregar</button>
+      </div>
+    </section>
+
+    <section class="circuito-section">
+      <h2>Circuito</h2>
+      <div id="circuitoContainer" class="circuito-container">
+        <!-- Aquí se agregan los dispositivos -->
+      </div>
+      <button class="btn" id="btnCalcularSalida">Calcular salida</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

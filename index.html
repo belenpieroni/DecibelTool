@@ -3,11 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DecibelTool </title>
+  <title>DecibelTool - Calculadora de Ganancia/Pérdida en dB</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main>
-    <h1>dBToolt pruebasPierrard</h1>
+  <header>
+    <div class="container">
+      <h1 class="logo">DecibelTool</h1>
+      <nav>
+        <ul>
+          <li><a href="#index.html">Inicio</a></li>
+          <li><a href="#info">Características</a></li>
+          <li><a href="#concepts">Conceptos</a></li>
+          <li><a href="#tech">Tecnologías</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <h2>Calculadora de ganancia y pérdida en decibeles (dB)</h2>
+        <p>
+          Calculá la ganancia o pérdida en función de potencia, tensión o corriente. 
+          Construí una cadena de dispositivos y visualizá la ganancia total acumulada.
+        </p>
+        <a href="circuito.html" class="btn">Comenzar ahora</a>
+      </div>
+      <div class="hero-img">
+        <!--<img src="https://cdn-icons-png.flaticon.com/512/149/149076.png" alt="Ilustración señal" /> -->
+        <img src="C:\Users\Administrator\Desktop\UTN\2025\Comu\DecibelTool\imagenes\Logo.jpg" alt=""Ilustracion señal" /> 
+      </div> 
+    </div>
+  </section>
+  <section id="info">
+    <section class="info">
+      <div class="container">
+        <h3>¿Qué permite hacer DecibelTool?</h3>
+        <ul>
+          <li>Seleccionar tipo de cálculo: <strong>Ganancia</strong> o <strong>Pérdida</strong></li>
+          <li>Elegir magnitud: <strong>Potencia</strong>, <strong>Tensión</strong>, <strong>Corriente</strong></li>
+          <li>Agregar dispositivos: amplificadores o atenuadores, con nombre, tipo y valor en dB</li>
+          <li>Visualizar lista secuencial del circuito</li>
+          <li>Cálculo automático de la <strong>ganancia/pérdida total</strong></li>
+          <li>Interfaz intuitiva y simple</li>
+        </ul>
+      </div>
+    </section>
+  </section>
+
+  <section id="concepts">
+    <section class="concepts">
+      <div class="container">
+        <h3>Conceptos aplicados</h3>
+        <p>
+          Este proyecto aplica conceptos de la práctica de <strong>Comunicación de Datos</strong>, 
+          en particular el cálculo de <strong>ganancia/pérdida en dB</strong> en un circuito de hasta 5 dispositivos.
+        </p>
+      </div>
+    </section>
+  </section>
+
+  <section id="tech">
+    <section class="tech">
+      <div class="container">
+        <h3>Tecnologías utilizadas</h3>
+        <ul class="tech-list">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+        </ul>
+      </div>
+    </section>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; Comunicacion de datos. Universidad Tecnologica Nacional FRLP.</p>
+      <p>Balduzzi - Cucchiarelli - Pieroni - Pierrard</p>
+    </div>
+  </footer>
 </body>
 </html>
