@@ -1,0 +1,67 @@
+/* Hero section */
+.hero {
+  background: linear-gradient(to right, #29C0DF, #29C0DF);
+  color: white;
+  padding: 60px 0;
+}
+
+.hero .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.hero-text h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.hero-img {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-img img {
+  max-width: 300px;
+}
+
+/* Info / Características */
+.info, .concepts, .tech {
+  padding: 60px 0;
+  background-color: white;
+}
+
+.info h3, .concepts h3, .tech h3 {
+  font-size: 28px;
+  color: #00b4d8;
+  margin-bottom: 20px;
+}
+
+.info ul, .tech-list {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.tech-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.tech-list li {
+  background-color: #e0f7fa;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-weight: bold;
+}
