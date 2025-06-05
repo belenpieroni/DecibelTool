@@ -1,107 +1,132 @@
-// Variables
-let dbEntrada = null;
+let entradaDB = 0;
 const dispositivos = [];
-const maxDispositivos = 5;
 
-// Elementos DOM
-const inputDB = document.getElementById('inputDB');
-const btnEntrada = document.getElementById('btnEntrada');
-const tipoDispositivo = document.getElementById('tipoDispositivo');
-const valorDispositivo = document.getElementById('valorDispositivo');
-const magnitudDispositivo = document.getElementById('magnitudDispositivo');
-const btnAgregarDispositivo = document.getElementById('btnAgregarDispositivo');
-const circuitoContainer = document.getElementById('circuitoContainer');
-const btnCalcularSalida = document.getElementById('btnCalcularSalida');
+const inputDB = document.getElementById("inputDB");
+const btnEntrada = document.getElementById("btnEntrada");
+const tipoDispositivo = document.getElementById("tipoDispositivo");
+const valorDispositivo = document.getElementById("valorDispositivo");
+const magnitudDispositivo = document.getElementById("magnitudDispositivo");
+const btnAgregarDispositivo = document.getElementById("btnAgregarDispositivo");
+const circuitoContainer = document.getElementById("circuitoContainer");
+const btnCalcularSalida = document.getElementById("btnCalcularSalida");
 
-// Función para mostrar error (puede ser alert o console)
-function mostrarError(msg) {
-  alert(msg);
-  console.error(msg);
-}
-
-// Evento para ingresar dB de entrada
-btnEntrada.addEventListener('click', () => {
-  const val = parseFloat(inputDB.value);
-  console.log("Valor de entrada:", val);
-  if (isNaN(val)) {
-    mostrarError('Ingrese un valor válido para los dB de entrada.');
-    return;
-  }
-  dbEntrada = val;
-  alert(`dB de entrada establecido en ${dbEntrada} dB`);
+btnEntrada.addEventListener("click", () => {
+  entradaDB = parseFloat(inputDB.value);
+  alert(`Entrada establecida en ${entradaDB} dB`);
 });
 
-// Evento para agregar dispositivo
-btnAgregarDispositivo.addEventListener('click', () => {
-  if (dbEntrada === null) {
-    mostrarError('Primero ingrese el valor de dB de entrada.');
-    return;
-  }
-  if (dispositivos.length >= maxDispositivos) {
-    mostrarError(`Solo se pueden agregar hasta ${maxDispositivos} dispositivos.`);
-    return;
-  }
+btnAgregarDispositivo.addEventListener("click", () => {
   const tipo = tipoDispositivo.value;
-  const val = parseFloat(valorDispositivo.value);
+  const valor = parseFloat(valorDispositivo.value);
   const magnitud = magnitudDispositivo.value;
 
-  console.log("Agregar dispositivo:", { tipo, val, magnitud });
-
-  if (isNaN(val)) {
-    mostrarError('Ingrese un valor válido para el dispositivo.');
+  if (isNaN(valor)) {
+    alert("Por favor ingrese un valor numérico para el dispositivo.");
     return;
   }
 
-  dispositivos.push({ tipo, valor: val, magnitud });
-  valorDispositivo.value = '';
-
-  actualizarCircuito();
+  dispositivos.push({ tipo, valor, magnitud });
+  renderCircuito();
 });
 
-// Actualiza la lista de dispositivos y subtotal
-function actualizarCircuito() {
-  circuitoContainer.innerHTML = '';
-  let subtotal = dbEntrada;
+btnCalcularSalida.addEventListener("click", () => {
+  let total = entradaDB;
 
-  const lista = document.createElement('ol');
+  dispositivos.forEach((dispositivo) => {
+    const { tipo, valor, magnitud } = dispositivo;
+    let ganancia = 0;
 
-  dispositivos.forEach(disp => {
-    if (disp.tipo === 'amplificador') {
-      subtotal += disp.valor;
-    } else if (disp.tipo === 'atenuador') {
-      subtotal -= disp.valor;
+    if (tipo === "amplificador") {
+      ganancia =
+        magnitud === "potencia"
+          ? 10 * Math.log10(Math.pow(10, valor / 10))
+          : 20 * Math.log10(Math.pow(10, valor / 20));
+    } else {
+      ganancia =
+        magnitud === "potencia"
+          ? -10 * Math.log10(Math.pow(10, valor / 10))
+          : -20 * Math.log10(Math.pow(10, valor / 20));
     }
-    const li = document.createElement('li');
-    li.textContent = `${disp.tipo} (${disp.magnitud}): ${disp.valor} dB — subtotal: ${subtotal.toFixed(2)} dB`;
-    lista.appendChild(li);
+
+    total += ganancia;
+    dispositivo.subtotal = total;
   });
 
-  circuitoContainer.appendChild(lista);
+  renderCircuito();
+  alert(`Valor final de salida: ${total.toFixed(2)} dB`);
+});
 
-  const resultadoFinal = document.createElement('p');
-  resultadoFinal.style.fontWeight = 'bold';
-  resultadoFinal.textContent = `Ganancia/Pérdida total del circuito: ${subtotal.toFixed(2)} dB`;
-  circuitoContainer.appendChild(resultadoFinal);
+function renderCircuito() {
+  circuitoContainer.innerHTML = "";
+  let subtotal = entradaDB;
+
+  dispositivos.forEach((dispositivo, index) => {
+    const div = document.createElement("div");
+    div.className = "dispositivo";
+
+    const icono = document.createElement("div");
+    icono.className = "icono";
+    icono.textContent = dispositivo.tipo === "amplificador" ? "🔊" : "🔇";
+
+    const tipo = document.createElement("div");
+    tipo.className = "tipo";
+    tipo.textContent = dispositivo.tipo.charAt(0).toUpperCase() + dispositivo.tipo.slice(1);
+
+    const valor = document.createElement("div");
+    valor.className = "valor";
+    valor.textContent = `${dispositivo.valor} dB (${dispositivo.magnitud})`;
+
+    subtotal = calcularSubtotal(subtotal, dispositivo);
+
+    const subtotalDiv = document.createElement("div");
+    subtotalDiv.className = "subtotal";
+    subtotalDiv.textContent = `Subtotal: ${subtotal.toFixed(2)} dB`;
+
+    div.appendChild(tipo);
+    div.appendChild(valor);
+    div.appendChild(icono);
+    div.appendChild(subtotalDiv);
+
+    circuitoContainer.appendChild(div);
+
+    const conector = document.createElement("div");
+    conector.className = "conector";
+    circuitoContainer.appendChild(conector);
+  });
+
+  // Agregar nodo final de salida
+  const salida = document.createElement("div");
+  salida.className = "dispositivo";
+
+  const iconoSalida = document.createElement("div");
+  iconoSalida.className = "icono";
+  iconoSalida.textContent = "📤";
+
+  const tipoSalida = document.createElement("div");
+  tipoSalida.className = "tipo";
+  tipoSalida.textContent = "Salida";
+
+  const valorSalida = document.createElement("div");
+  valorSalida.className = "subtotal";
+  valorSalida.textContent = `Total: ${subtotal.toFixed(2)} dB`;
+
+  salida.appendChild(tipoSalida);
+  salida.appendChild(iconoSalida);
+  salida.appendChild(valorSalida);
+
+  circuitoContainer.appendChild(salida);
 }
 
-// Evento para calcular salida final
-btnCalcularSalida.addEventListener('click', () => {
-  if (dbEntrada === null) {
-    mostrarError('Primero ingrese el valor de dB de entrada.');
-    return;
-  }
-  if (dispositivos.length === 0) {
-    mostrarError('Agregue al menos un dispositivo para calcular la salida.');
-    return;
-  }
-  let salida = dbEntrada;
-  dispositivos.forEach(disp => {
-    if (disp.tipo === 'amplificador') {
-      salida += disp.valor;
-    } else if (disp.tipo === 'atenuador') {
-      salida -= disp.valor;
-    }
-  });
+function calcularSubtotal(actual, dispositivo) {
+  const { tipo, valor, magnitud } = dispositivo;
 
-  alert(`El valor de salida es: ${salida.toFixed(2)} dB`);
-});
+  let resultado = actual;
+
+  if (tipo === "amplificador") {
+    resultado += valor;
+  } else {
+    resultado -= valor;
+  }
+
+  return resultado;
+}

@@ -149,3 +149,53 @@ footer {
 html {
   scroll-behavior: smooth;
 }
+
+/* Dispositivos en circuito */
+.circuito-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.dispositivo {
+  background-color: #ffffff;
+  border: 2px solid #00b4d8;
+  border-radius: 15px;
+  padding: 15px;
+  min-width: 120px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.dispositivo .icono {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.dispositivo .tipo {
+  font-weight: bold;
+  color: #ff5c35;
+  font-size: 14px;
+}
+
+.dispositivo .valor {
+  color: #333;
+  font-size: 16px;
+}
+
+.dispositivo .subtotal {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #0077b6;
+  font-weight: bold;
+}
+
+.conector {
+  width: 40px;
+  height: 2px;
+  background-color: #999;
+  align-self: center;
+}
