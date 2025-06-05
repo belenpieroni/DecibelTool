@@ -1,4 +1,3 @@
-/* */
 let entradaDB = 0;
 const dispositivos = [];
 

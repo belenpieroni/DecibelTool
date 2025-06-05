@@ -170,3 +170,112 @@ input, select {
   border-radius: 2px;
   flex-shrink: 0;
 }
+/* circuito.css */
+
+#circuitoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dispositivo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e3f2fd;
+  border: 2px solid #2196f3;
+  border-radius: 8px;
+  padding: 12px 16px;
+  min-width: 130px;
+  box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+  position: relative;
+  user-select: none;
+}
+
+.dispositivo .icono {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.dispositivo .tipo {
+  font-weight: 700;
+  color: #0d47a1;
+  margin-bottom: 6px;
+  text-transform: capitalize;
+}
+
+.dispositivo .valor,
+.dispositivo .subtotal {
+  font-size: 14px;
+  color: #1565c0;
+  margin-bottom: 4px;
+}
+
+.dispositivo button.btnEliminar {
+  margin-top: 8px;
+  background-color: #ef5350;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.3s ease;
+}
+
+.dispositivo button.btnEliminar:hover {
+  background-color: #b71c1c;
+}
+
+.conector {
+  width: 30px;
+  height: 4px;
+  background: linear-gradient(90deg, #90caf9, #1976d2);
+  border-radius: 2px;
+  margin-bottom: 40px;
+  flex-shrink: 0;
+}
+
+#btnCalcularSalida {
+  margin-top: 16px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+#btnCalcularSalida:hover {
+  background-color: #1565c0;
+}
+
+/* NUEVO: contenedor general del circuito con borde, sombra y padding */
+.circuito-wrapper {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 20px 25px;
+  background-color: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(100, 116, 139, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.caja-general {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
