@@ -4,16 +4,29 @@ section.info {
   transition: all 0.3s ease;
 }
 
+/* Fuente base */
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.7;
+  font-size: 17px;
+  color: #333;
+}
 /* Títulos */
 .info h3 {
-  font-size: 28px;
-  color: #00b4d8;
+  font-size: 32px;
+  color: #023e8a;
+  font-weight: 700;
   margin-bottom: 15px;
-  transition: color 0.3s ease;
 }
 
-.info h3:hover {
-  color: #ff5c35;
+.info h3::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 4px;
+  background: #00b4d8;
+  margin-top: 8px;
+  border-radius: 2px;
 }
 
 /* Subtítulos */
@@ -114,4 +127,21 @@ aside.tip {
 aside.tip:hover {
   transform: scale(1.01);
   background-color: #d0f0f7;
+}
+
+/* Animación de entrada */
+.hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+mjx-container {
+  margin: 20px 0;
+  font-size: 1.1em;
 }
