@@ -10,14 +10,44 @@ const btnAgregarDispositivo = document.getElementById("btnAgregarDispositivo");
 const circuitoContainer = document.getElementById("circuitoContainer");
 const btnCalcularSalida = document.getElementById("btnCalcularSalida");
 
-btnEntrada.addEventListener("click", () => {
-  entradaDB = parseFloat(inputDB.value);
-  if (isNaN(entradaDB)) {
-    alert("Ingrese un valor numérico válido para la entrada.");
-    return;
-  }
-  renderCircuito();
+//FUNCION PARA LOS HEADERS
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("./componentes/header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML("afterbegin", data);
+            personalizarHeader();
+        })
+        .catch(error => console.error("Error al cargar el header:", error));
 });
+
+function personalizarHeader() {
+    const navList = document.getElementById("nav-list");
+    document.querySelectorAll("#nav-list li.extra").forEach(el => el.remove());
+
+    const path = window.location.pathname;
+    const isIndex = path.endsWith("/") || path.endsWith("index.html");
+
+    if (isIndex) {
+        let item = document.createElement("li");
+        item.innerHTML = '<a href="#info">Características</a>';
+        item.classList.add("extra");
+        navList.appendChild(item);
+    } else if (path.includes("teoria.html")) {
+        let item = document.createElement("li");
+        item.innerHTML = '<a href="circuito.html">Calculadora</a>';
+        item.classList.add("extra");
+        navList.appendChild(item);
+    } else if (path.includes("circuito.html")) {
+        let item = document.createElement("li");
+        item.innerHTML = '<a href="circuito.html">Calculadora</a>';
+        item.classList.add("extra");
+        navList.appendChild(item);
+
+        document.getElementById("header").classList.add("header-dark");
+    }
+}
+
 
 btnAgregarDispositivo.addEventListener("click", () => {
   if (dispositivos.length >= 5) {

@@ -12,27 +12,18 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="logo">DecibelTool</div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="teoria.html">Teoría</a></li>
-          <li><a href="circuito.html">Calculadora</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <script src="js/app.js"></script>
 
-  <section class="info">
+  <section class="info hidden">
     <div class="container">
       <h3>¿Qué es un decibel?</h3>
       <p>El decibel (dB) es una unidad logarítmica que compara dos valores de potencia, tensión o corriente. No mide valores absolutos, sino <strong>relaciones</strong>. Esto la vuelve especialmente útil en telecomunicaciones, donde las señales varían en órdenes de magnitud.</p>
       <p>Por ejemplo, si una señal se amplifica 10 veces en potencia, su ganancia en decibeles será:</p>
-      <p>\[
-      G(dB) = 10 \cdot \log_{10}\left(\frac{10}{1}\right) = 10\, dB
-      \]</p>
+      <div class="equation-box">
+        <p>\[
+        G(dB) = 10 \cdot \log_{10}\left(\frac{10}{1}\right) = 10\, dB
+        \]</p>
+      </div>
       <aside class="tip">
         ¿Por qué se usa 10 o 20 en la fórmula?  
         Para potencia se usa <code>10 × log</code> porque la potencia está relacionada con el cuadrado de la tensión o corriente. Por eso, para tensión o corriente usamos <code>20 × log</code>.
@@ -40,7 +31,7 @@
     </div>
   </section>
 
-  <section class="info">
+  <section class="info hidden">
     <div class="container">
       <h3>Ganancia y pérdida</h3>
       <p>Una señal tiene <strong>ganancia</strong> cuando aumenta respecto a su valor original (dB positivos), y <strong>pérdida</strong> cuando disminuye (dB negativos).</p>
@@ -60,30 +51,34 @@
       </ul>
 
       <p>Ejemplo práctico: si una señal de 1V se amplifica a 2V, la ganancia será:</p>
-      <p>\[
-      G(dB) = 20 \cdot \log_{10}\left(\frac{2}{1}\right) = 6.02\, dB
-      \]</p>
+      <div class="equation-box">
+        <p>\[
+        G(dB) = 20 \cdot \log_{10}\left(\frac{2}{1}\right) = 6.02\, dB
+        \]</p>
+      </div>
     </div>
   </section>
 
-  <section class="info">
+  <section class="info hidden">
     <div class="container">
       <h3>Sumatoria en cascada</h3>
       <p>Una gran ventaja del uso de dB es que las ganancias o pérdidas se pueden <strong>sumar directamente</strong> cuando los dispositivos están conectados en serie (cascada).</p>
       <p>Ejemplo de sistema:</p>
-      <p>\[
-      \begin{align*}
-      \text{Amplificador A} &: +12\, dB \\
-      \text{Atenuador B}    &: -3\, dB \\
-      \text{Amplificador C} &: +5\, dB \\
-      \hline
-      \text{Ganancia total} &: 12 - 3 + 5 = \mathbf{+14\, dB}
-      \end{align*}
-      \]</p>
+      <div class="equation-box">
+        <p>\[
+        \begin{align*}
+        \text{Amplificador A} &: +12\, dB \\
+        \text{Atenuador B}    &: -3\, dB \\
+        \text{Amplificador C} &: +5\, dB \\
+        \hline
+        \text{Ganancia total} &: 12 - 3 + 5 = \mathbf{+14\, dB}
+        \end{align*}
+        \]</p>
+      </div>
     </div>
   </section>
 
-  <section class="info">
+  <section class="info hidden">
     <div class="container">
       <h3>Aplicaciones reales del decibel</h3>
       <ul>
@@ -104,21 +99,28 @@
 
   <script>
     const blocks = document.querySelectorAll('.info');
-    const observer = new IntersectionObserver((entries) => {
+
+    blocks.forEach(block => {
+      block.classList.add('hidden'); // Oculta por defecto
+    });
+
+    const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('show');
+        entry.target.classList.add('show');
+        } else {
+          entry.target.classList.remove('show');
         }
       });
     }, {
-      threshold: 0.1
+      threshold: 0.3
     });
 
     blocks.forEach(block => {
-      block.classList.add('hidden');
       observer.observe(block);
     });
   </script>
+
 
 </body>
 </html>
