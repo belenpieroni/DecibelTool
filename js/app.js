@@ -48,6 +48,14 @@ function personalizarHeader() {
     }
 }
 
+btnEntrada.addEventListener("click", () => {
+  entradaDB = parseFloat(inputDB.value);
+  if (isNaN(entradaDB)) {
+    alert("Ingrese un valor numérico válido para la entrada.");
+    return;
+  }
+  renderCircuito();
+});
 
 btnAgregarDispositivo.addEventListener("click", () => {
   if (dispositivos.length >= 5) {

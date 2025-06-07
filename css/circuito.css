@@ -32,21 +32,20 @@ body {
   font-weight: bold;
 }
 
-nav ul {
-  list-style: none; 
-  display: flex; 
-  gap: 20px;
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 15px;
 }
 
-nav a {
+.nav-list li a {
+  color: #fff;
   text-decoration: none;
-  color: var(--background-light);
   font-weight: 500;
-  transition: color 0.3s ease;
 }
 
-nav a:hover {
-  color: var(--primary-color) !important;
+.nav-list li a:hover {
+  text-decoration: underline;
 }
 
 /* Main layout */
