@@ -29,15 +29,18 @@ btnAgregarDispositivo.addEventListener("click", () => {
   const valor = parseFloat(valorDispositivo.value);
   const magnitud = magnitudDispositivo.value;
 
-  if (isNaN(valor)) {
-    alert("Por favor ingrese un valor numérico para el dispositivo.");
+  if (isNaN(valor) || valor <= 0) {
+    alert("Ingrese un valor físico válido (mayor a 0).");
     return;
   }
 
-  dispositivos.push({ tipo, valor, magnitud });
-  renderCircuito();
+  const gananciaDb = calcularGananciaDispositivo(valor, tipo, magnitud);
+
+  dispositivos.push({ tipo, valor, magnitud, gananciaDb });
   valorDispositivo.value = "";
+  renderCircuito();
 });
+
 
 // btnCalcularSalida.addEventListener("click", () => {
 //   if (isNaN(entradaDB)) {
@@ -241,58 +244,37 @@ btnCalcularSalida.addEventListener("click", () => {
 //   circuitoContainer.appendChild(salida);
 // }
 
-function renderCircuito(valorFinal = null) {
+function renderCircuito() {
   circuitoContainer.innerHTML = "";
 
   if (isNaN(entradaDB)) return;
 
-  // Nodo de entrada
+  let subtotalDB = entradaDB;
+
+  // Entrada
   const entradaDiv = document.createElement("div");
   entradaDiv.className = "dispositivo";
 
-  const iconoEntrada = document.createElement("div");
-  iconoEntrada.className = "icono";
-  iconoEntrada.textContent = "📥";
+  entradaDiv.innerHTML = `
+    <div class="icono">📥</div>
+    <div class="tipo">Entrada</div>
+    <div class="valor">${entradaDB.toFixed(2)} dB</div>
+  `;
 
-  const tipoEntrada = document.createElement("div");
-  tipoEntrada.className = "tipo";
-  tipoEntrada.textContent = "Entrada";
-
-  const valorEntrada = document.createElement("div");
-  valorEntrada.className = "valor";
-  valorEntrada.textContent = `${entradaDB.toFixed(2)} dB`;
-
-  entradaDiv.appendChild(tipoEntrada);
-  entradaDiv.appendChild(iconoEntrada);
-  entradaDiv.appendChild(valorEntrada);
   circuitoContainer.appendChild(entradaDiv);
 
-  if (dispositivos.length === 0) return;
-
-  let subtotalDB = entradaDB;
-
   dispositivos.forEach((dispositivo, index) => {
+    subtotalDB += dispositivo.gananciaDb;
+
     const div = document.createElement("div");
     div.className = "dispositivo";
 
-    const icono = document.createElement("div");
-    icono.className = "icono";
-    icono.textContent = dispositivo.tipo === "amplificador" ? "🔊" : "🔇";
-
-    const tipo = document.createElement("div");
-    tipo.className = "tipo";
-    tipo.textContent = dispositivo.tipo.charAt(0).toUpperCase() + dispositivo.tipo.slice(1);
-
-    const valor = document.createElement("div");
-    valor.className = "valor";
-    valor.textContent = `${dispositivo.valor} dB (${dispositivo.magnitud})`;
-
-    const signo = dispositivo.tipo === "amplificador" ? 1 : -1;
-    subtotalDB += signo * dispositivo.valor;
-
-    const subtotalDiv = document.createElement("div");
-    subtotalDiv.className = "subtotal";
-    subtotalDiv.textContent = `Subtotal: ${subtotalDB.toFixed(2)} dB`;
+    div.innerHTML = `
+      <div class="icono">${dispositivo.tipo === "amplificador" ? "🔊" : "🔇"}</div>
+      <div class="tipo">${dispositivo.tipo.charAt(0).toUpperCase() + dispositivo.tipo.slice(1)}</div>
+      <div class="valor">${dispositivo.valor} ${dispositivo.magnitud}</div>
+      <div class="subtotal">Subtotal: ${subtotalDB.toFixed(2)} dB</div>
+    `;
 
     const btnEliminar = document.createElement("button");
     btnEliminar.textContent = "Eliminar";
@@ -302,12 +284,7 @@ function renderCircuito(valorFinal = null) {
       renderCircuito();
     });
 
-    div.appendChild(tipo);
-    div.appendChild(valor);
-    div.appendChild(icono);
-    div.appendChild(subtotalDiv);
     div.appendChild(btnEliminar);
-
     circuitoContainer.appendChild(div);
 
     if (index !== dispositivos.length - 1) {
@@ -317,7 +294,7 @@ function renderCircuito(valorFinal = null) {
     }
   });
 
-  // Conector final + salida
+  // Conector + salida
   const conectorFinal = document.createElement("div");
   conectorFinal.className = "conector";
   circuitoContainer.appendChild(conectorFinal);
@@ -325,21 +302,26 @@ function renderCircuito(valorFinal = null) {
   const salida = document.createElement("div");
   salida.className = "dispositivo";
 
-  const iconoSalida = document.createElement("div");
-  iconoSalida.className = "icono";
-  iconoSalida.textContent = "📤";
-
-  const tipoSalida = document.createElement("div");
-  tipoSalida.className = "tipo";
-  tipoSalida.textContent = "Salida";
-
-  const valorSalida = document.createElement("div");
-  valorSalida.className = "subtotal";
-  valorSalida.textContent = `Total: ${subtotalDB.toFixed(2)} dB`;
-
-  salida.appendChild(tipoSalida);
-  salida.appendChild(iconoSalida);
-  salida.appendChild(valorSalida);
+  salida.innerHTML = `
+    <div class="icono">📤</div>
+    <div class="tipo">Salida</div>
+    <div class="subtotal">Total: ${subtotalDB.toFixed(2)} dB</div>
+  `;
 
   circuitoContainer.appendChild(salida);
+}
+
+
+function calcularGananciaDispositivo(valor, tipo, magnitud) {
+  if (valor <= 0) return 0; // Protección básica
+
+  let ganancia = 0;
+
+  if (magnitud === "potencia") {
+    ganancia = 10 * Math.log10(valor);
+  } else if (magnitud === "tension" || magnitud === "corriente") {
+    ganancia = 20 * Math.log10(valor);
+  }
+
+  return tipo === "amplificador" ? ganancia : -ganancia;
 }
