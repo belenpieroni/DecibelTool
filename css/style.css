@@ -5,12 +5,21 @@
   box-sizing: border-box;
 }
 
+/* Variables CSS */
+:root {
+  --primary-color: #ff5c35;
+  --secondary-color: #00b4d8;
+  --background-light: #f9fafb;
+  --text-dark: #333;
+}
+
 /* General */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  line-height: 1.6;
-  background-color: #f4f9fb;
-  color: #333;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.7;
+  font-size: 17px;
+  color: var(--text-dark);
+  background-color: var(--background-light);
 }
 
 .container {
@@ -26,43 +35,59 @@ header {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.logo {
-  color: #ff5c35;
-  font-size: 24px;
-  font-weight: bold;
-}
-
 header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* Estilo para circuito oscuro */
+.header-dark {
+  background-color: #1f2937;
+  color: #fff;
+}
+
+.header-dark a {
+  color: #fff;
+}
+
+.logo {
+  color: var(--primary-color);
+  font-size: 24px;
+  font-weight: bold;
+}
+
 nav ul {
-  list-style: none;
-  display: flex;
+  list-style: none; 
+  display: flex; 
   gap: 20px;
+}
+
+nav li {
+  display: inline-block;
 }
 
 nav a {
   text-decoration: none;
-  color: #333;
+  color: var(--text-dark);
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #ff5c35;
+  color: var(--primary-color);
 }
 
 /* Botón */
 .btn {
   display: inline-block;
-  background-color: #ff5c35;
+  background-color: var(--primary-color);
   color: white;
   padding: 12px 24px;
   border-radius: 25px;
   text-decoration: none;
   font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
@@ -78,6 +103,7 @@ footer {
   margin-top: 40px;
 }
 
+/* Animación de desplazamiento */
 html {
   scroll-behavior: smooth;
 }

@@ -6,39 +6,51 @@ section.info {
 
 /* Títulos */
 .info h3 {
-  font-size: 28px;
-  color: #00b4d8;
+  font-size: 32px;
+  color: var(--secondary-color);
+  font-weight: 700;
   margin-bottom: 15px;
-  transition: color 0.3s ease;
+  position: relative;
 }
 
-.info h3:hover {
-  color: #ff5c35;
+.info h3::after {
+  width: 0;
+  height: 4px;
+  background: var(--secondary-color);
+  border-radius: 2px;
+  margin-top: 8px;
+  content: "";
+  display: block;
+  transition: width 0.4s ease-in-out;
+}
+
+.info h3:hover::after {
+  width: 150px;
 }
 
 /* Subtítulos */
 .info h4 {
   font-size: 20px;
-  color: #ff5c35;
+  color: var(--primary-color);
   margin-top: 25px;
   margin-bottom: 10px;
   transition: color 0.3s ease;
 }
 
 .info h4:hover {
-  color: #00b4d8;
+  color: var(--secondary-color);
 }
 
-/* Párrafos */
+/* párrafos */
 .info p {
   margin-bottom: 15px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .info p:hover {
-  transform: translateX(3px);
+  transform: translateX(5px);
+  color: var(--primary-color);
 }
-
 /* Listas */
 .info ul {
   padding-left: 20px;
@@ -53,19 +65,18 @@ section.info {
 }
 
 .info li::before {
-  content: "•";
   position: absolute;
   left: 0;
-  color: #00b4d8;
+  color: var(--secondary-color);
   transition: color 0.3s ease;
 }
 
 .info li:hover {
-  color: #ff5c35;
+  color: var(--primary-color);
 }
 
 .info li:hover::before {
-  color: #ff5c35;
+  color: var(--primary-color);
 }
 
 /* Código inline */
@@ -85,7 +96,7 @@ code:hover {
 /* Bloques de código */
 pre {
   background-color: #f9f9f9;
-  border-left: 4px solid #00b4d8;
+  border-left: 4px solid var(--secondary-color);
   padding: 15px;
   overflow-x: auto;
   margin-top: 10px;
@@ -103,15 +114,51 @@ pre:hover {
 /* Cuadro de información o tip */
 aside.tip {
   background-color: #e0f7fa;
-  border-left: 4px solid #00b4d8;
+  border-left: 4px solid var(--secondary-color);
   padding: 15px;
   font-style: italic;
   margin: 20px 0;
   border-radius: 6px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 aside.tip:hover {
-  transform: scale(1.01);
-  background-color: #d0f0f7;
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
+}
+
+/* Animación de entrada */
+.hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+mjx-container {
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+.equation-box {
+  background-color: var(--backgruond-light);
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.equation-box:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px var(--primary-color);
 }
