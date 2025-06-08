@@ -198,3 +198,25 @@ input, select {
   border-radius: 8px;
   text-align: center;
 }
+
+/* NUEVO: contenedor general del circuito con borde, sombra y padding */
+.circuito-wrapper {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 20px 25px;
+  background-color: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(100, 116, 139, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.caja-general {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
