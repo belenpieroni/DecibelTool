@@ -298,3 +298,20 @@ input, select {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
 }
+
+.configuracion-y-agregado {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.configuracion-y-agregado .media-ancho {
+  flex: 1 1 48%;
+}
+
+.configuracion-y-agregado .caja-general {
+  margin: 0;         /* Quitamos el margen vertical */
+  padding: 20px 24px;
+}
+

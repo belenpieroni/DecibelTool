@@ -45,6 +45,32 @@ function personalizarHeader() {
 
 btnCalcularSalida.addEventListener("click", () => {
     calcularSalida();
+
+    const seccionResultado = document.getElementById("resultadoFinal");
+    if (seccionResultado) {
+        seccionResultado.scrollIntoView({ behavior: "smooth" });
+    }
+});
+
+document.getElementById("inputValor").addEventListener("input", () => {
+    const nuevoValor = parseFloat(document.getElementById("inputValor").value);
+
+    if (dispositivos.length > 0 && !isNaN(nuevoValor) && nuevoValor > 0) {
+        dispositivos[0].valorEntrada = nuevoValor;
+        calcularSalida();
+    }
+});
+
+document.getElementById("selectMagnitud").addEventListener("change", () => {
+    const nuevaMagnitud = document.getElementById("selectMagnitud").value;
+
+    if (dispositivos.length > 0) {
+        if (dispositivos.some(d => d.magnitud !== nuevaMagnitud)) {
+            // Actualizamos la magnitud de todos los dispositivos
+            dispositivos.forEach(d => d.magnitud = nuevaMagnitud);
+            calcularSalida();
+        }
+    }
 });
 
 document.getElementById("btnAgregarDispositivo").addEventListener("click", () => {
@@ -78,9 +104,9 @@ document.getElementById("btnAgregarDispositivo").addEventListener("click", () =>
 
     dispositivos.push({ db, valorEntrada, magnitud, tipo });
 
-    if (dispositivos.length === 1) {
-        document.getElementById("inputValor").disabled = true;
-    }
+    //if (dispositivos.length === 1) {
+    //    document.getElementById("inputValor").disabled = true;
+    //}
 
     calcularSalida();
     renderizarCircuito(false);
@@ -105,24 +131,29 @@ function calcularSalida() {
         return;
     }
 
-    let valorActual = dispositivos[0].valorEntrada;
-    const divisor = dispositivos[0].magnitud === "potencia" ? 10 : 20;
+    let valorActual = parseFloat(document.getElementById("inputValor").value);
+    const magnitud = dispositivos[0].magnitud;
+    const divisor = magnitud === "potencia" ? 10 : 20;
 
     dispositivos.forEach((dispositivo, index) => {
+        dispositivo.valorEntrada = valorActual;
+
         const signo = dispositivo.tipo === "atenuador" ? -1 : 1;
         const factor = signo * (dispositivo.db / divisor);
         const suma = Math.log10(valorActual) + factor;
         valorActual = Math.pow(10, suma);
-        dispositivos[index].salida = valorActual;
+
+        dispositivo.salida = valorActual;
     });
 
     ultimaSalida = valorActual;
 
-    renderizarCircuito(true)
-    document.getElementById("resultado").innerText =
-      ` ${formatearNumero(valorActual)} ${unidadSimbolo(dispositivos[0].magnitud)}`;
+    renderizarCircuito(true);
 
+    document.getElementById("resultado").innerText =
+        ` ${formatearNumero(valorActual)} ${unidadSimbolo(magnitud)}`;
 }
+
 
 function renderizarCircuito(mostrarSubtotales) {
     circuitoContainer.innerHTML = "";
