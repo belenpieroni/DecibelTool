@@ -43,6 +43,17 @@ function personalizarHeader() {
     }
 }
 
+// FUNCION PARA EL FOOTER
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("./componentes/footer.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer-placeholder").innerHTML = data;
+        })
+        .catch(error => console.error("Error al cargar el footer:", error));
+});
+
+// CALCULADORA
 btnCalcularSalida.addEventListener("click", () => {
     calcularSalida();
 });

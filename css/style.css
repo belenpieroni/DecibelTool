@@ -7,10 +7,13 @@
 
 /* Variables CSS */
 :root {
-  --primary-color: #ff5c35;
-  --secondary-color: #00b4d8;
-  --background-light: #f9fafb;
-  --text-dark: #333;
+  --anaranjado: #ff5c35;
+  --celeste-primario: #00b4d8;
+  --fondo-blanco: #f9fafb;
+  --gris-oscuro: #333;
+  --azul-footer: #023047;
+  --azul-gris: #1f2937;
+  --azul-brillante: #1565c0;
 }
 
 /* General */
@@ -18,8 +21,8 @@ body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.7;
   font-size: 17px;
-  color: var(--text-dark);
-  background-color: var(--background-light);
+  color: var(--gris-oscuro);
+  background-color: var(--fondo-blanco);
 }
 
 .container {
@@ -41,9 +44,11 @@ header .container {
   align-items: center;
 }
 
-/* Estilo para circuito oscuro */
+/* Estilo para header oscuro */
 .header-dark {
-  background-color: #1f2937;
+  background-color: var(--azul-gris);
+  padding: 20px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   color: #fff;
 }
 
@@ -52,7 +57,7 @@ header .container {
 }
 
 .logo {
-  color: var(--primary-color);
+  color: var(--anaranjado);
   font-size: 24px;
   font-weight: bold;
 }
@@ -69,41 +74,41 @@ nav li {
 
 nav a {
   text-decoration: none;
-  color: var(--text-dark);
+  color: var(--gris-oscuro);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: var(--primary-color);
+  color: var(--anaranjado);
 }
 
 /* Botón */
 .btn {
   display: inline-block;
-  background-color: var(--primary-color);
+  background-color: var(--anaranjado);
   color: white;
   padding: 12px 24px;
   border-radius: 25px;
   text-decoration: none;
   font-weight: bold;
   transition: background-color 0.3s ease;
+  border: none;
 }
 
 .btn:hover {
-  background-color: #e04a22;
+  background-color: var(--azul-footer);
 }
 
 /* Footer */
 footer {
-  background-color: #023047;
+  background-color: var(--azul-footer);
   color: white;
   text-align: center;
   padding: 20px 0;
   margin-top: 40px;
 }
 
-/* Animación de desplazamiento */
 html {
   scroll-behavior: smooth;
 }
