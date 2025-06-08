@@ -1,6 +1,6 @@
 /* Sección Hero */
 .hero {
-  background: linear-gradient(to right, #29C0DF, #29C0DF);
+  background: #29C0DF;
   color: white;
   padding: 60px 0;
 }
@@ -36,7 +36,6 @@
   max-width: 300px;
 }
 
-/* Secciones Info, Conceptos, Tecnología */
 .info, .concepts, .tech {
   padding: 60px 0;
   background-color: white;
@@ -44,7 +43,7 @@
 
 .info h3, .concepts h3, .tech h3 {
   font-size: 28px;
-  color: var(--secondary-color);
+  color: var(--celeste-primario);
   margin-bottom: 20px;
 }
 

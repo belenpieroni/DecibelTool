@@ -18,29 +18,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function personalizarHeader() {
     const navList = document.getElementById("nav-list");
-    document.querySelectorAll("#nav-list li.extra").forEach(el => el.remove());
+    navList.innerHTML = ""; 
 
     const path = window.location.pathname;
     const isIndex = path.endsWith("/") || path.endsWith("index.html");
+    const isTeoria = path.includes("teoria.html");
+    const isCircuito = path.includes("circuito.html");
+
+    let enlaces = [];
 
     if (isIndex) {
-        let item = document.createElement("li");
-        item.innerHTML = '<a href="#info">Características</a>';
-        item.classList.add("extra");
-        navList.appendChild(item);
-    } else if (path.includes("teoria.html")) {
-        let item = document.createElement("li");
-        item.innerHTML = '<a href="circuito.html">Calculadora</a>';
-        item.classList.add("extra");
-        navList.appendChild(item);
-    } else if (path.includes("circuito.html")) {
-        let item = document.createElement("li");
-        item.innerHTML = '<a href="circuito.html">Calculadora</a>';
-        item.classList.add("extra");
-        navList.appendChild(item);
+        enlaces = [
+            { texto: "Teoría", href: "teoria.html" },
+            { texto: "Características", href: "#info" },
+            { texto: "Calculadora", href: "circuito.html" }
+        ];
+    } else if (isTeoria) {
+        enlaces = [
+            { texto: "Inicio", href: "index.html" },
+            { texto: "Calculadora", href: "circuito.html" }
+        ];
+    } else if (isCircuito) {
+        enlaces = [
+            { texto: "Inicio", href: "index.html" },
+            { texto: "Teoría", href: "teoria.html" }
+        ];
 
         document.getElementById("header").classList.add("header-dark");
     }
+
+    enlaces.forEach(enlace => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${enlace.href}">${enlace.texto}</a>`;
+        navList.appendChild(li);
+    });
 }
 
 // FUNCION PARA EL FOOTER
