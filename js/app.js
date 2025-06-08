@@ -48,14 +48,21 @@ function personalizarHeader() {
     }
 }
 
+let valorEntrada = 0;
+let tipoMagnitudEntrada = "";
+
 btnEntrada.addEventListener("click", () => {
-  entradaDB = parseFloat(inputDB.value);
-  if (isNaN(entradaDB)) {
-    alert("Ingrese un valor numérico válido para la entrada.");
+  valorEntrada = parseFloat(inputDB.value);
+  tipoMagnitudEntrada = magnitudDispositivo.value;
+
+  if (isNaN(valorEntrada) || valorEntrada <= 0) {
+    alert("Ingrese un valor físico válido mayor a 0.");
     return;
   }
+
   renderCircuito();
 });
+
 
 btnAgregarDispositivo.addEventListener("click", () => {
   if (dispositivos.length >= 5) {
@@ -64,20 +71,19 @@ btnAgregarDispositivo.addEventListener("click", () => {
   }
 
   const tipo = tipoDispositivo.value;
-  const valor = parseFloat(valorDispositivo.value);
+  const valorDb = parseFloat(valorDispositivo.value);
   const magnitud = magnitudDispositivo.value;
 
-  if (isNaN(valor) || valor <= 0) {
-    alert("Ingrese un valor físico válido (mayor a 0).");
+  if (isNaN(valorDb)) {
+    alert("Ingrese un valor en dB válido.");
     return;
   }
 
-  const gananciaDb = calcularGananciaDispositivo(valor, tipo, magnitud);
-
-  dispositivos.push({ tipo, valor, magnitud, gananciaDb });
+  dispositivos.push({ tipo, valorDb, magnitud });
   valorDispositivo.value = "";
   renderCircuito();
 });
+
 
 
 // btnCalcularSalida.addEventListener("click", () => {
@@ -285,24 +291,22 @@ btnCalcularSalida.addEventListener("click", () => {
 function renderCircuito() {
   circuitoContainer.innerHTML = "";
 
-  if (isNaN(entradaDB)) return;
+  if (isNaN(valorEntrada) || valorEntrada <= 0) return;
 
-  let subtotalDB = entradaDB;
+  let valorActual = valorEntrada;
 
-  // Entrada
+  // Nodo de entrada
   const entradaDiv = document.createElement("div");
   entradaDiv.className = "dispositivo";
-
   entradaDiv.innerHTML = `
     <div class="icono">📥</div>
     <div class="tipo">Entrada</div>
-    <div class="valor">${entradaDB.toFixed(2)} dB</div>
+    <div class="valor">${valorEntrada} ${unidadSimbolo(tipoMagnitudEntrada)}</div>
   `;
-
   circuitoContainer.appendChild(entradaDiv);
 
   dispositivos.forEach((dispositivo, index) => {
-    subtotalDB += dispositivo.gananciaDb;
+    valorActual = aplicarGanancia(valorActual, dispositivo.valorDb, dispositivo.magnitud, dispositivo.tipo);
 
     const div = document.createElement("div");
     div.className = "dispositivo";
@@ -310,8 +314,8 @@ function renderCircuito() {
     div.innerHTML = `
       <div class="icono">${dispositivo.tipo === "amplificador" ? "🔊" : "🔇"}</div>
       <div class="tipo">${dispositivo.tipo.charAt(0).toUpperCase() + dispositivo.tipo.slice(1)}</div>
-      <div class="valor">${dispositivo.valor} ${dispositivo.magnitud}</div>
-      <div class="subtotal">Subtotal: ${subtotalDB.toFixed(2)} dB</div>
+      <div class="valor">${dispositivo.valorDb} dB (${dispositivo.magnitud})</div>
+      <div class="subtotal">Subtotal: ${valorActual.toFixed(4)} ${unidadSimbolo(dispositivo.magnitud)}</div>
     `;
 
     const btnEliminar = document.createElement("button");
@@ -332,7 +336,7 @@ function renderCircuito() {
     }
   });
 
-  // Conector + salida
+  // Nodo de salida
   const conectorFinal = document.createElement("div");
   conectorFinal.className = "conector";
   circuitoContainer.appendChild(conectorFinal);
@@ -343,11 +347,12 @@ function renderCircuito() {
   salida.innerHTML = `
     <div class="icono">📤</div>
     <div class="tipo">Salida</div>
-    <div class="subtotal">Total: ${subtotalDB.toFixed(2)} dB</div>
+    <div class="subtotal">Total: ${valorActual.toFixed(4)} ${unidadSimbolo(tipoMagnitudEntrada)}</div>
   `;
 
   circuitoContainer.appendChild(salida);
 }
+
 
 function calcularGananciaDispositivo(valor, tipo, magnitud) {
   if (valor <= 0) return 0; // Protección básica
@@ -361,4 +366,19 @@ function calcularGananciaDispositivo(valor, tipo, magnitud) {
   }
 
   return tipo === "amplificador" ? ganancia : -ganancia;
+}
+
+function aplicarGanancia(valor, dB, magnitud, tipo) {
+  const base = magnitud === "potencia" ? 10 : 20;
+  const exponente = (tipo === "amplificador" ? 1 : -1) * (dB / base);
+  return valor * Math.pow(10, exponente);
+}
+
+function unidadSimbolo(magnitud) {
+  switch (magnitud) {
+    case "tension": return "V";
+    case "corriente": return "A";
+    case "potencia": return "W";
+    default: return "";
+  }
 }
