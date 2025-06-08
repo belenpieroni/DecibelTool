@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // CALCULADORA
 btnCalcularSalida.addEventListener("click", () => {
-    calcularSalida();
+    calcularSalida(true);
 
     const seccionResultado = document.getElementById("resultadoFinal");
     if (seccionResultado) {
@@ -68,7 +68,7 @@ document.getElementById("inputValor").addEventListener("input", () => {
 
     if (dispositivos.length > 0 && !isNaN(nuevoValor) && nuevoValor > 0) {
         dispositivos[0].valorEntrada = nuevoValor;
-        calcularSalida();
+        calcularSalida(false);
     }
 });
 
@@ -79,7 +79,7 @@ document.getElementById("selectMagnitud").addEventListener("change", () => {
         if (dispositivos.some(d => d.magnitud !== nuevaMagnitud)) {
             // Actualizamos la magnitud de todos los dispositivos
             dispositivos.forEach(d => d.magnitud = nuevaMagnitud);
-            calcularSalida();
+            calcularSalida(false);
         }
     }
 });
@@ -113,13 +113,9 @@ document.getElementById("btnAgregarDispositivo").addEventListener("click", () =>
         return;
     }
 
-    dispositivos.push({ db, valorEntrada, magnitud, tipo });
+    dispositivos.push({ db, valorEntrada, magnitud, tipo, salida: null });
 
-    //if (dispositivos.length === 1) {
-    //    document.getElementById("inputValor").disabled = true;
-    //}
-
-    calcularSalida();
+    calcularSalida(false);
     renderizarCircuito(false);
 });
 
@@ -136,7 +132,7 @@ function eliminarDispositivo(index) {
     }
 }
 
-function calcularSalida() {
+function calcularSalida(mostrarSubtotales = true) {
     if (dispositivos.length === 0) {
         alert("Agrega al menos un dispositivo.");
         return;
@@ -159,12 +155,11 @@ function calcularSalida() {
 
     ultimaSalida = valorActual;
 
-    renderizarCircuito(true);
+    renderizarCircuito(mostrarSubtotales);
 
     document.getElementById("resultado").innerText =
         ` ${formatearNumero(valorActual)} ${unidadSimbolo(magnitud)}`;
 }
-
 
 function renderizarCircuito(mostrarSubtotales) {
     circuitoContainer.innerHTML = "";
