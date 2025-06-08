@@ -258,6 +258,25 @@ input, select {
   background-color: #1565c0;
 }
 
+.resultado-box {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resultado {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  padding: 0.5rem;
+  background-color: #ffffff;
+  border: 2px dashed #333;
+  border-radius: 8px;
+  text-align: center;
+}
+
 /* NUEVO: contenedor general del circuito con borde, sombra y padding */
 .circuito-wrapper {
   max-width: 960px;
