@@ -12,19 +12,18 @@ A medida que agregás dispositivos, el sistema muestra cómo se va acumulando la
 
 ## Características
 
-- Selección de tipo de cálculo: **Ganancia** o **Pérdida**
-- Elección de magnitud: **Potencia**, **Tensión**, **Corriente**
-- Agregar dispositivos con nombre, tipo y valor en dB
+- Se permite ingresar una entrada
+- Elección de magnitud: **Watts**, **Volts**, **Amperes**
+- Agregar dispositivos con tipo (amplificador/atenuador) y valor en dB
 - Visualizar lista secuencial del circuito
-- Cálculo automático de la **ganancia/pérdida total**
+- Cálculo automático de la **salida total**
 - Interfaz intuitiva y simple
 
 ---
 
 ## Conceptos aplicados
 
-Este proyecto aplica conceptos de la práctica de **Comunicación de Datos**, en particular:
-
+Este proyecto aplica conceptos de la práctica 3 de **Comunicación de Datos**, en particular:
 - Cálculo de **ganancia/pérdida en dB** en un circuito de hasta 5 dispositivos.
 
 ---

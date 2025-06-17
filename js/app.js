@@ -88,7 +88,6 @@ document.getElementById("selectMagnitud").addEventListener("change", () => {
 
     if (dispositivos.length > 0) {
         if (dispositivos.some(d => d.magnitud !== nuevaMagnitud)) {
-            // Actualizamos la magnitud de todos los dispositivos
             dispositivos.forEach(d => d.magnitud = nuevaMagnitud);
             calcularSalida(false);
         }
@@ -220,6 +219,5 @@ function unidadSimbolo(magnitud) {
 }
 
 function formatearNumero(numero) {
-  // Fijamos 4 decimales, pero quitamos ceros innecesarios
-  return parseFloat(numero.toFixed(4)).toString();
+  return parseFloat(numero.toFixed(3)).toString();
 }

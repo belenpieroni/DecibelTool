@@ -1,20 +1,16 @@
-# Archivos de configuración de VSCode
+# gitignore
 .vscode/
 
-# Archivos del sistema operativo
 .DS_Store
 Thumbs.db
 
-# Logs y archivos temporales
 *.log
 *.tmp
 
-# Node (por si luego agregás algún build system)
 node_modules/
 dist/
 build/
 
-# Archivos de backup o edición
 *.bak
 *.swp
 *.swo
