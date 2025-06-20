@@ -254,3 +254,9 @@ document.getElementById("verHistorialBtn").addEventListener("click", async () =>
     }
   }
 });
+
+function ocultarHistorial() {
+  document.getElementById("historialSidebar").style.display = "none";
+}
+
+document.getElementById("cerrarHistorialBtn").addEventListener("click", ocultarHistorial);

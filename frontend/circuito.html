@@ -11,74 +11,61 @@
 </head>
 <body>
   <main class="main">
-    <div class="configuracion-y-agregado">
+    <section class="content">
+      <div class="configuracion-y-agregado">
 
-      <section class="caja-general card-contenedor">
-        <h2>Configuración inicial</h2>
-        <label for="inputValor">Valor de entrada:</label>
-        <input type="number" id="inputValor" placeholder="Ingrese valor">
+        <section class="caja-general card-contenedor">
+          <h2>Configuración inicial</h2>
+          <label for="inputValor">Valor de entrada:</label>
+          <input type="number" id="inputValor" placeholder="Ingrese valor">
 
-        <label for="selectMagnitud">Magnitud:</label>
-        <select id="selectMagnitud">
-          <option value="potencia">Potencia (W)</option>
-          <option value="tension">Tensión (V)</option>
-          <option value="corriente">Corriente (A)</option>
-        </select>
+          <label for="selectMagnitud">Magnitud:</label>
+          <select id="selectMagnitud">
+            <option value="potencia">Potencia (W)</option>
+            <option value="tension">Tensión (V)</option>
+            <option value="corriente">Corriente (A)</option>
+          </select>
+        </section>
+
+        <section class="caja-general card-contenedor">
+          <h2>Agregar dispositivos</h2>
+          <label for="inputDB">Decibeles (dB):</label>
+          <input type="number" id="inputDB" placeholder="Ingrese dB">
+
+          <label for="selectTipo">Tipo de dispositivo:</label>
+          <select id="selectTipo">
+            <option value="amplificador">Amplificador</option>
+            <option value="atenuador">Atenuador</option>
+          </select>
+
+          <button id="btnAgregarDispositivo" class="btn">Agregar Dispositivo</button>
+        </section>
+      </div>
+
+      <section class="circuito-wrapper card-contenedor">
+        <h2>Circuito</h2>
+        <div id="circuitoContainer"></div>
+        <button id="btnCalcularSalida" class="btn">Calcular salida</button>
       </section>
 
-      <section class="caja-general card-contenedor">
-        <h2>Agregar dispositivos</h2>
-        <label for="inputDB">Decibeles (dB):</label>
-        <input type="number" id="inputDB" placeholder="Ingrese dB">
+      <section id="resultadofinal" class="caja-general card-contenedor">
+        <h2>Resultado final</h2>
+        <div id="resultado" class="resultado">--</div>
+      </section>   
+    </section>
 
-        <label for="selectTipo">Tipo de dispositivo:</label>
-        <select id="selectTipo">
-          <option value="amplificador">Amplificador</option>
-          <option value="atenuador">Atenuador</option>
-        </select>
-
-        <button id="btnAgregarDispositivo" class="btn">Agregar Dispositivo</button>
-      </section>
+    <button id="verHistorialBtn" class="btn">
+      Ver historial
+    </button>
+    <div id="historialSidebar">
+      <button class="cerrar-historial" id="cerrarHistorialBtn">&times;</button>
+      <h3>Historial de la sesión</h3>
+      <div id="historialContainer"></div>
     </div>
-
-    <section class="circuito-wrapper card-contenedor">
-      <h2>Circuito</h2>
-      <div id="circuitoContainer"></div>
-      <button id="btnCalcularSalida" class="btn">Calcular salida</button>
-    </section>
-
-    <section id="resultadofinal" class="caja-general card-contenedor">
-      <h2>Resultado final</h2>
-      <div id="resultado" class="resultado">--</div>
-    </section>
+    
   </main>
 
   <div id="footer-placeholder"></div>
-
- 
-  <button id="verHistorialBtn" class="btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 1001;">
-    Ver historial
-  </button>
-
-  <div id="historialSidebar" style="
-    position: fixed;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: 320px;
-    background-color: #ffffff;
-    border-left: 2px solid #ccc;
-    padding: 20px;
-    overflow-y: auto;
-    display: none;
-    z-index: 1000;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-    font-family: 'Poppins', sans-serif;
-  ">
-    <h3>Historial de la sesión</h3>
-    <div id="historialContainer"></div>
-  </div>
-
 
   <script src="js/app.js"></script>
 </body>
