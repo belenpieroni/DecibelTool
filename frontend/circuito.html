@@ -51,33 +51,35 @@
       <h2>Resultado final</h2>
       <div id="resultado" class="resultado">--</div>
     </section>
-
   </main>
+
   <div id="footer-placeholder"></div>
+
+ 
+  <button id="verHistorialBtn" class="btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 1001;">
+    Ver historial
+  </button>
+
+  <div id="historialSidebar" style="
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 320px;
+    background-color: #ffffff;
+    border-left: 2px solid #ccc;
+    padding: 20px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    font-family: 'Poppins', sans-serif;
+  ">
+    <h3>Historial de la sesión</h3>
+    <div id="historialContainer"></div>
+  </div>
+
+
   <script src="js/app.js"></script>
-  
-<button id="verHistorialBtn" class="btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 1001;">
-  Ver historial
-</button>
-
-<div id="historialSidebar" style="
-  position: fixed;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 320px;
-  background-color: #ffffff;
-  border-left: 2px solid #ccc;
-  padding: 20px;
-  overflow-y: auto;
-  display: none;
-  z-index: 1000;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-  font-family: 'Poppins', sans-serif;
-">
-  <h3>Historial de la sesión</h3>
-  <div id="historialContainer"></div>
-</div>
-
 </body>
 </html>
