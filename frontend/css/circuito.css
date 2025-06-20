@@ -215,3 +215,34 @@ h2 {
 .cerrar-historial:hover {
   color: #ff5c35;
 }
+
+.historial-item {
+  background-color: #f0f4fa;
+  border-left: 4px solid var(--secondary-color);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.historial-item:hover {
+  transform: scale(1.01);
+}
+
+.historial-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.historial-lista {
+  list-style: none;
+  padding-left: 10px;
+}
+
+.historial-lista li {
+  margin: 5px 0;
+  font-size: 0.95em;
+}

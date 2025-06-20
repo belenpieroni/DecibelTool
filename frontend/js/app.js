@@ -252,31 +252,36 @@ document.getElementById("verHistorialBtn").addEventListener("click", async () =>
 
       container.innerHTML = "";
 
-      historial.forEach((registro, i) => {
-        const fecha = new Date(registro.timestamp);
-        const div = document.createElement("div");
+      historial.reverse().forEach((registro, i) => {
+        const numeroCircuito = historial.length - i;
         const circuito = typeof registro.circuito === "string"
-            ? JSON.parse(registro.circuito)
-            : registro.circuito;
+          ? JSON.parse(registro.circuito)
+          : registro.circuito;
 
-        let circuitoHTML = "";
-        circuito.forEach((item, j) => {
-            circuitoHTML += `
-              <div style="margin-left: 15px; margin-bottom: 10px;">
-                <strong>Dispositivo ${j + 1}</strong><br>
-                Tipo: ${item.tipo} | dB: ${item.db}<br>
-                Entrada: ${item.valorEntrada.toFixed(2)} ${unidadSimbolo(item.magnitud)}<br>
-                Salida: ${item.salida.toFixed(2)} ${unidadSimbolo(item.magnitud)}
-              </div>
-            `;
-        });
+        const versionDiv = document.createElement("div");
+        versionDiv.className = "historial-item";
 
-        div.innerHTML = `
-            <strong>Circuito ${i + 1}</strong><br>
-            ${circuitoHTML}
-            <hr>
+        const encabezado = `
+          <div class="historial-encabezado">
+            <h4>Circuito ${numeroCircuito}</h4>
+          </div>
         `;
-        container.appendChild(div);
+
+        let listaDispositivos = "<ul class='historial-lista'>";
+        circuito.forEach((item, j) => {
+          listaDispositivos += `
+            <li>
+              <span class="tipo">${item.tipo === "amplificador" ? "🔊" : "🔇"} ${item.tipo}</span> |
+              <strong>${item.db} dB</strong> |
+              Entrada: ${item.valorEntrada.toFixed(2)} ${unidadSimbolo(item.magnitud)} |
+              Salida: ${item.salida.toFixed(2)} ${unidadSimbolo(item.magnitud)}
+            </li>
+          `;
+        });
+        listaDispositivos += "</ul>";
+
+        versionDiv.innerHTML = encabezado + listaDispositivos;
+        container.appendChild(versionDiv);
       });
     } catch (error) {
       container.innerHTML = "<p style='color:red'>Error al obtener historial.</p>";
