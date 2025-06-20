@@ -30,8 +30,26 @@ Este proyecto aplica conceptos de la práctica 3 de **Comunicación de Datos**, 
 
 ## Tecnologías utilizadas
 
+Frontend
 - HTML
 - CSS
 - JavaScript
 
----
+Backend
+- Python (3.10)
+- Flask
+- JSON
+
+Módulos
+flask – Framework principal para el backend
+pymysql – Cliente MySQL en Python
+cryptography – Necesario internamente por pymysql si la autenticación requiere SHA256
+
+DB (PythonAnywhere)
+- MySQL
+- host="acucchiarelli.mysql.pythonanywhere-services.com"
+- user="acucchiarelli"
+- database="acucchiarelli$default"
+- port=3306
+- password="Hola123456789"
+#La base de datos tiene una vigencia de tres meses, salvo que se renueve manualmente

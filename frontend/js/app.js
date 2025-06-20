@@ -4,6 +4,8 @@ const circuitoContainer = document.getElementById("circuitoContainer");
 const inputDB = document.getElementById("inputDB");
 const btnAgregarDispositivo = document.getElementById("btnAgregarDispositivo");
 const btnCalcularSalida = document.getElementById("btnCalcularSalida");
+const sessionId = crypto.randomUUID();
+
 
 //FUNCION PARA LOS HEADERS
 document.addEventListener("DOMContentLoaded", function () {
@@ -221,3 +223,34 @@ function unidadSimbolo(magnitud) {
 function formatearNumero(numero) {
   return parseFloat(numero.toFixed(3)).toString();
 }
+
+document.getElementById("verHistorialBtn").addEventListener("click", async () => {
+  const sidebar = document.getElementById("historialSidebar");
+  const container = document.getElementById("historialContainer");
+
+  sidebar.style.display = sidebar.style.display === "none" ? "block" : "none";
+
+  if (sidebar.style.display === "block") {
+    try {
+      const response = await fetch(`https://acucchiarelli.pythonanywhere.com/historial?sessionId=${sessionId}`);
+      const historial = await response.json();
+
+      container.innerHTML = "";
+
+      historial.forEach((registro, i) => {
+        const fecha = new Date(registro.timestamp);
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <strong>Versión ${i + 1}</strong><br>
+          Fecha: ${fecha.toLocaleString()}<br>
+          Circuito: <pre>${JSON.stringify(registro.circuito, null, 2)}</pre>
+          <hr>
+        `;
+        container.appendChild(div);
+      });
+    } catch (error) {
+      container.innerHTML = "<p style='color:red'>Error al obtener historial.</p>";
+      console.error(error);
+    }
+  }
+});
