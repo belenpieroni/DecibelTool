@@ -67,8 +67,23 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // CALCULADORA
-btnCalcularSalida.addEventListener("click", () => {
+btnCalcularSalida.addEventListener("click", async () => {
     calcularSalida(true);
+    try {
+        await fetch("https://acucchiarelli.pythonanywhere.com/guardarHistorial", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            sessionId: sessionId,
+            circuito: dispositivos
+        })
+        });
+        console.log("Historial guardado correctamente.");
+    } catch (error) {
+        console.error("Error al guardar historial:", error);
+    }
 
     const seccionResultado = document.getElementById("resultadoFinal");
     if (seccionResultado) {
@@ -240,11 +255,26 @@ document.getElementById("verHistorialBtn").addEventListener("click", async () =>
       historial.forEach((registro, i) => {
         const fecha = new Date(registro.timestamp);
         const div = document.createElement("div");
+        const circuito = typeof registro.circuito === "string"
+            ? JSON.parse(registro.circuito)
+            : registro.circuito;
+
+        let circuitoHTML = "";
+        circuito.forEach((item, j) => {
+            circuitoHTML += `
+              <div style="margin-left: 15px; margin-bottom: 10px;">
+                <strong>Dispositivo ${j + 1}</strong><br>
+                Tipo: ${item.tipo} | dB: ${item.db}<br>
+                Entrada: ${item.valorEntrada.toFixed(2)} ${unidadSimbolo(item.magnitud)}<br>
+                Salida: ${item.salida.toFixed(2)} ${unidadSimbolo(item.magnitud)}
+              </div>
+            `;
+        });
+
         div.innerHTML = `
-          <strong>Versión ${i + 1}</strong><br>
-          Fecha: ${fecha.toLocaleString()}<br>
-          Circuito: <pre>${JSON.stringify(registro.circuito, null, 2)}</pre>
-          <hr>
+            <strong>Circuito ${i + 1}</strong><br>
+            ${circuitoHTML}
+            <hr>
         `;
         container.appendChild(div);
       });
