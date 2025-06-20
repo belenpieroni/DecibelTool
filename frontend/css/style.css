@@ -112,3 +112,33 @@ footer {
 html {
   scroll-behavior: smooth;
 }
+
+/* Responsive */
+@media (max-width: 992px) {
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 16px;
+  }
+
+  .logo {
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .btn {
+    font-size: 15px;
+    padding: 10px 20px;
+  }
+
+  .container {
+    width: 95%;
+  }
+}

@@ -213,12 +213,12 @@ h2 {
 }
 
 .cerrar-historial:hover {
-  color: #ff5c35;
+  color: var(--anaranjado);
 }
 
 .historial-item {
   background-color: #f0f4fa;
-  border-left: 4px solid var(--secondary-color);
+  border-left: 4px solid var(--celeste-primario);
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 15px;
@@ -245,4 +245,69 @@ h2 {
 .historial-lista li {
   margin: 5px 0;
   font-size: 0.95em;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .content {
+    margin: 20px 10px;
+    padding: 0 10px;
+  }
+
+  .configuracion-y-agregado {
+    flex-direction: column;
+  }
+
+  .configuracion-y-agregado .caja-general {
+    flex: 1 1 100%;
+  }
+
+  h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .resultado-box h2 {
+    font-size: 18px;
+  }
+
+  #historialSidebar {
+    width: 100%;
+    border-left: none;
+    border-top: 2px solid #ccc;
+    top: auto;
+    bottom: 0;
+    height: 60%;
+  }
+}
+
+@media (max-width: 480px) {
+  .dispositivo {
+    min-width: 120px;
+    padding: 10px;
+  }
+
+  .dispositivo .icono {
+    font-size: 24px;
+  }
+
+  .dispositivo .tipo {
+    font-size: 14px;
+  }
+
+  .dispositivo .valor,
+  .dispositivo .subtotal {
+    font-size: 12px;
+  }
+
+  .resultado {
+    font-size: 18px;
+  }
+
+  .historial-encabezado {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
 }

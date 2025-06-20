@@ -33,6 +33,38 @@
 
   <section class="info hidden">
     <div class="container">
+      <h3>Atenuadores vs. Amplificadores</h3>
+      <p>Los <strong>amplificadores</strong> y <strong>atenuadores</strong> son dispositivos que modifican la magnitud de una señal eléctrica. La diferencia clave radica en su efecto sobre la señal:</p>
+
+      <ul>
+        <li><strong>Amplificadores:</strong> Aumentan la amplitud o potencia de la señal. Se usan para compensar pérdidas o adaptar una señal débil a un nivel útil.</li>
+        <li><strong>Atenuadores:</strong> Disminuyen la amplitud o potencia. Se utilizan para proteger etapas sensibles, igualar niveles de señal o evitar distorsiones.</li>
+      </ul>
+
+      <h4>Ejemplos comunes</h4>
+      <ul>
+        <li><strong>Amplificador de audio:</strong> Eleva la señal proveniente de un celular o tocadiscos antes de enviarla a los parlantes.</li>
+        <li><strong>Amplificador de antena:</strong> Mejora la recepción de señal en televisores o radios.</li>
+        <li><strong>Atenuador de RF:</strong> Reduce la intensidad de señales en sistemas de radiofrecuencia para evitar saturación.</li>
+        <li><strong>Atenuadores ópticos:</strong> En redes de fibra óptica, regulan la señal de luz para evitar errores.</li>
+      </ul>
+
+      <h4>¿Qué provoca una ganancia o pérdida?</h4>
+      <p>Las señales se amplifican o se atenúan debido a varios factores físicos:</p>
+      <ul>
+        <li><strong>Ganancia:</strong> Proviene de dispositivos activos que introducen energía al sistema, como micrófonos o circuitos operacionales con alimentación externa.</li>
+        <li><strong>Pérdida:</strong> Es natural en cables, conectores o componentes pasivos, donde parte de la energía se disipa como calor o se refleja.</li>
+      </ul>
+
+      <aside class="tip">
+        Un amplificador no “crea” señal mágica: solo transfiere energía desde su fuente de alimentación hacia la señal. Sin esa fuente, no hay ganancia posible.
+      </aside>
+    </div>
+  </section>
+
+
+  <section class="info hidden">
+    <div class="container">
       <h3>Ganancia y pérdida</h3>
       <p>Una señal tiene <strong>ganancia</strong> cuando aumenta respecto a su valor original (dB positivos), y <strong>pérdida</strong> cuando disminuye (dB negativos).</p>
 
@@ -47,32 +79,16 @@
       <ul>
         <li><strong>Potencia:</strong> \(\ P(dB) = 10 \cdot \log_{10}\left(\frac{P_e}{P_s}\right)\ \)</li>
         <li><strong>Tensión:</strong> \(\ P(dB) = 20 \cdot \log_{10}\left(\frac{V_e}{V_s}\right)\ \)</li>
-        <li><strong>Corriente:</strong> \(\ P(dB) = 10 \cdot \log_{10}\left(\frac{I_e}{I_s}\right)\ \)</li>
+        <li><strong>Corriente:</strong> \(\ P(dB) = 20 \cdot \log_{10}\left(\frac{I_e}{I_s}\right)\ \)</li>
       </ul>
 
-      <p>Ejemplo práctico: si una señal de 1V se amplifica a 2V, la ganancia será:</p>
+      <p>Ejemplo práctico: si una señal de 1W se amplifica a con un dispositivo de 30dB de ganancia, la salida será:</p>
       <div class="equation-box">
         <p>\[
-        G(dB) = 20 \cdot \log_{10}\left(\frac{2}{1}\right) = 6.02\, dB
+        30 dB = 10 \cdot \log_{10}\left(\frac{Ps}{1 W}\right) 
         \]</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="info hidden">
-    <div class="container">
-      <h3>Sumatoria en cascada</h3>
-      <p>Una gran ventaja del uso de dB es que las ganancias o pérdidas se pueden <strong>sumar directamente</strong> cuando los dispositivos están conectados en serie (cascada).</p>
-      <p>Ejemplo de sistema:</p>
-      <div class="equation-box">
         <p>\[
-        \begin{align*}
-        \text{Amplificador A} &: +12\, dB \\
-        \text{Atenuador B}    &: -3\, dB \\
-        \text{Amplificador C} &: +5\, dB \\
-        \hline
-        \text{Ganancia total} &: 12 - 3 + 5 = \mathbf{+14\, dB}
-        \end{align*}
+          Ps = 1000\, W
         \]</p>
       </div>
     </div>

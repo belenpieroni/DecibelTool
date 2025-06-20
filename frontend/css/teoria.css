@@ -154,3 +154,62 @@ mjx-container {
   transform: scale(1.02);
   box-shadow: 0 4px 12px var(--anaranjado);
 }
+
+/* Responsive */
+@media (max-width: 992px) {
+  .info h3 {
+    font-size: 26px;
+  }
+
+  .info h4 {
+    font-size: 18px;
+  }
+
+  .info p,
+  .info li {
+    font-size: 16px;
+  }
+
+  .equation-box {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  section.info {
+    margin: 40px 10px;
+  }
+
+  .info h3 {
+    font-size: 22px;
+  }
+
+  .info h4 {
+    font-size: 16px;
+  }
+
+  .info p,
+  .info li {
+    font-size: 15px;
+    text-align: justify;
+  }
+
+  .equation-box {
+    max-width: 100%;
+    padding: 12px;
+  }
+
+  aside.tip {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  pre {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  code {
+    font-size: 0.9em;
+  }
+}

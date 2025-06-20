@@ -148,14 +148,13 @@ document.getElementById("btnAgregarDispositivo").addEventListener("click", () =>
 
 function eliminarDispositivo(index) {
     dispositivos.splice(index, 1);
-    renderizarCircuito();
 
     if (dispositivos.length === 0) {
         document.getElementById("inputValor").disabled = false;
         ultimaSalida = null;
         document.getElementById("resultado").innerText = "";
     } else {
-        calcularSalida(false);
+        renderizarCircuito(false);
     }
 }
 
@@ -169,7 +168,7 @@ function calcularSalida(mostrarSubtotales = true) {
     const magnitud = dispositivos[0].magnitud;
     const divisor = magnitud === "potencia" ? 10 : 20;
 
-    dispositivos.forEach((dispositivo, index) => {
+    dispositivos.forEach((dispositivo) => {
         dispositivo.valorEntrada = valorActual;
 
         const signo = dispositivo.tipo === "atenuador" ? -1 : 1;
@@ -200,8 +199,8 @@ function renderizarCircuito(mostrarSubtotales) {
             <div class="tipo">${dispositivo.tipo.charAt(0).toUpperCase() + dispositivo.tipo.slice(1)}</div>
             <div class="valor">${dispositivo.db} dB (${dispositivo.magnitud})</div>
             ${mostrarSubtotales && dispositivo.salida !== null ? `
-                <div class="subtotal">Entrada: ${dispositivo.valorEntrada.toFixed(4)} ${unidadSimbolo(dispositivo.magnitud)}</div>
-                <div class="subtotal">Subtotal: ${dispositivo.salida.toFixed(4)} ${unidadSimbolo(dispositivo.magnitud)}</div>
+                <div class="subtotal">Entrada: ${formatearNumero(dispositivo.valorEntrada)} ${unidadSimbolo(dispositivo.magnitud)}</div>
+                <div class="subtotal">Subtotal: ${formatearNumero(dispositivo.salida)} ${unidadSimbolo(dispositivo.magnitud)}</div>
             ` : ""}
         `;
 
