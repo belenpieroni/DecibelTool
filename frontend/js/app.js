@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error("Error al cargar el footer:", error));
 });
 
-// CALCULADORA
+// CALCULADORA Y CIRCUITOS
 btnCalcularSalida.addEventListener("click", async () => {
     calcularSalida(true);
     try {
@@ -238,6 +238,7 @@ function formatearNumero(numero) {
   return parseFloat(numero.toFixed(3)).toString();
 }
 
+// FUNCIÓN PARA EL HISTORIAL
 document.getElementById("verHistorialBtn").addEventListener("click", async () => {
   const sidebar = document.getElementById("historialSidebar");
   const container = document.getElementById("historialContainer");
